@@ -1,2 +1,3 @@
-# TERS_Expense_Allocation_App
-Expense allocation productivity software
+# Welcome to your Lovable project
+
+TODO: Document your project here

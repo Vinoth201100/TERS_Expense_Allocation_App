@@ -1,0 +1,2 @@
+# TERS_Expense_Allocation_App
+Expense allocation productivity software

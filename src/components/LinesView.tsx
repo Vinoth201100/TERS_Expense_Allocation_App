@@ -154,7 +154,7 @@ export const LinesView = ({ status, title, description, embedded = false }: { st
 
   const isCommentFrozen = useCallback((l: Line): boolean => {
     if (isAdmin) return false;
-    if (status === "issue" && !!l.published_at && !!l.aa_decision_at && !!l.leads_feedback_at) return true;
+    if (status === "issue" && !!l.published_at) return true;
     return false;
   }, [isAdmin, status]);
 

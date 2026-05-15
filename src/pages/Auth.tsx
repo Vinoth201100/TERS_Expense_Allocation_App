@@ -66,18 +66,18 @@ const Auth = () => {
     toast.success("Account created — you can sign in now");
   };
 
-  const handleGoogleSSO = async () => {
+  const handleMcKinseySSO = async () => {
     setBusy(true);
-    const result = await lovable.auth.signInWithOAuth("google", {
+    const result = await lovable.auth.signInWithOAuth("microsoft", {
       redirect_uri: window.location.origin,
     });
     if (result.error) {
       setBusy(false);
-      return toast.error(result.error.message || "Google sign-in failed");
+      return toast.error(result.error.message || "McKinsey sign-in failed");
     }
     if (result.redirected) return;
     setBusy(false);
-    toast.success("Signed in with Google");
+    toast.success("Signed in with McKinsey SSO");
     nav("/", { replace: true });
   };
 
@@ -126,13 +126,11 @@ const Auth = () => {
                   type="button"
                   variant="outline"
                   className="w-full"
-                  onClick={handleGoogleSSO}
+                  onClick={handleMcKinseySSO}
                   disabled={busy}
                 >
-                  <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="#EA4335" d="M12 10.2v3.9h5.5c-.24 1.4-1.66 4.1-5.5 4.1-3.31 0-6-2.74-6-6.1s2.69-6.1 6-6.1c1.88 0 3.14.8 3.86 1.49l2.63-2.54C16.84 3.4 14.65 2.5 12 2.5 6.76 2.5 2.5 6.76 2.5 12S6.76 21.5 12 21.5c6.92 0 9.5-4.86 9.5-7.4 0-.5-.05-.88-.12-1.26H12z"/>
-                  </svg>
-                  Sign in with Google (SSO)
+                  <span className="inline-flex items-center justify-center w-4 h-4 mr-2 rounded-full bg-slate-200 text-slate-700 font-bold">M</span>
+                  Sign in with McKinsey SSO
                 </Button>
               </TabsContent>
               <TabsContent value="signup">

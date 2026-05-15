@@ -478,16 +478,20 @@ export const LinesView = ({ status, title, description, embedded = false }: { st
       },
       {
         key: "qc_comment", label: "Comment", group: "QC", defaultVisible: true,
-        render: (l) => (
-          <Input
-            disabled={isFrozen(l) || isCommentFrozen(l)}
-            value={l.qc_comment ?? ""}
-            onChange={(e) => setLines((prev) => prev.map((p) => p.id === l.id ? { ...p, qc_comment: e.target.value } : p))}
-            onBlur={(e) => updateField(l.id, "qc_comment", e.target.value)}
-            placeholder={isCommentFrozen(l) ? "Review completed — read-only" : "Notes…"}
-            className="h-8 text-sm min-w-[180px]"
-          />
-        ),
+        render: (l) => {
+          const commentFrozen = isFrozen(l) || isCommentFrozen(l);
+          return (
+            <Input
+              disabled={commentFrozen}
+              readOnly={commentFrozen}
+              value={l.qc_comment ?? ""}
+              onChange={(e) => setLines((prev) => prev.map((p) => p.id === l.id ? { ...p, qc_comment: e.target.value } : p))}
+              onBlur={(e) => updateField(l.id, "qc_comment", e.target.value)}
+              placeholder={isCommentFrozen(l) ? "Review completed — read-only" : "Notes…"}
+              className="h-8 text-sm min-w-[180px]"
+            />
+          );
+        },
       },
       {
         key: "attachments", label: "Files", group: "QC", defaultVisible: true,

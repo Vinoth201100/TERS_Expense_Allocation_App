@@ -154,7 +154,7 @@ export const LinesView = ({ status, title, description, embedded = false }: { st
 
   const isCommentFrozen = useCallback((l: Line): boolean => {
     if (isAdmin) return false;
-    if (status === "issue" && !!l.published_at) return true;
+    if (status === "issue" && !!l.published_at && !!l.aa_decision_at && !!l.leads_feedback_at) return true;
     return false;
   }, [isAdmin, status]);
 
@@ -484,7 +484,7 @@ export const LinesView = ({ status, title, description, embedded = false }: { st
             value={l.qc_comment ?? ""}
             onChange={(e) => setLines((prev) => prev.map((p) => p.id === l.id ? { ...p, qc_comment: e.target.value } : p))}
             onBlur={(e) => updateField(l.id, "qc_comment", e.target.value)}
-            placeholder={isCommentFrozen(l) ? "Published — read-only" : "Notes…"}
+            placeholder={isCommentFrozen(l) ? "Review completed — read-only" : "Notes…"}
             className="h-8 text-sm min-w-[180px]"
           />
         ),

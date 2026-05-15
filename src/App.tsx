@@ -59,7 +59,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <AuthProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
           <Routes>
             <Route path="/auth" element={<Auth />} />
             {/* QA Dashboard is for QA auditors, TLs, and admins. EA-only users are redirected to /ea/dashboard. */}

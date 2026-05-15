@@ -1,0 +1,1 @@
+ALTER TABLE public.batches ADD COLUMN IF NOT EXISTS sharepoint_url text;

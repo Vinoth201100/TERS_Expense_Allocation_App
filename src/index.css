@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Operational tool — Linear/Notion vibe. Slate base, deep violet accent. All HSL. */
+@layer base {
+  :root {
+    --background: 250 20% 98%;
+    --foreground: 252 25% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 252 25% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 252 25% 12%;
+    --primary: 262 52% 36%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 262 48% 50%;
+    --secondary: 250 16% 94%;
+    --secondary-foreground: 252 25% 18%;
+    --muted: 250 16% 95%;
+    --muted-foreground: 252 14% 45%;
+    --accent: 262 50% 94%;
+    --accent-foreground: 262 52% 28%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 60% 38%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --border: 250 16% 88%;
+    --input: 250 16% 88%;
+    --ring: 262 52% 36%;
+    --radius: 0.5rem;
+    --sidebar-background: 252 25% 10%;
+    --sidebar-foreground: 250 20% 92%;
+    --sidebar-primary: 262 55% 58%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 252 22% 16%;
+    --sidebar-accent-foreground: 250 20% 96%;
+    --sidebar-border: 252 22% 18%;
+    --sidebar-ring: 262 55% 58%;
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --shadow-elegant: 0 1px 2px hsl(252 25% 12% / 0.04), 0 4px 12px hsl(252 25% 12% / 0.04);
+  }
+  .dark {
+    --background: 252 25% 8%;
+    --foreground: 250 20% 96%;
+    --card: 252 22% 11%;
+    --card-foreground: 250 20% 96%;
+    --popover: 252 22% 11%;
+    --popover-foreground: 250 20% 96%;
+    --primary: 262 55% 58%;
+    --primary-foreground: 252 25% 8%;
+    --primary-glow: 262 60% 68%;
+    --secondary: 252 18% 16%;
+    --secondary-foreground: 250 20% 96%;
+    --muted: 252 18% 14%;
+    --muted-foreground: 252 14% 62%;
+    --accent: 262 35% 20%;
+    --accent-foreground: 262 55% 80%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 50% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 90% 55%;
+    --warning-foreground: 252 25% 8%;
+    --border: 252 18% 18%;
+    --input: 252 18% 18%;
+    --ring: 262 55% 58%;
+  }
+}
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}

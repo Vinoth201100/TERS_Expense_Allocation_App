@@ -219,3 +219,21 @@ begin
   where m.team_lead_id = auth.uid() and ur.role is not null
   order by k.kind, full_name;
 end $function$;
+
+-- Return all users who have a specific auditor role (auditor or expense_auditor)
+CREATE OR REPLACE FUNCTION public.get_auditors_by_role(_role text, _kind benchmark_kind)
+ RETURNS TABLE(auditor_id uuid, full_name text, email text, kind benchmark_kind, default_count integer, today_count integer, present_today boolean)
+ LANGUAGE plpgsql STABLE SECURITY DEFINER SET search_path TO 'public'
+AS $function$
+BEGIN
+  IF NOT (public.has_role(auth.uid(),'team_lead') OR public.has_role(auth.uid(),'admin')) THEN
+    RAISE EXCEPTION 'Not allowed';
+  END IF;
+  RETURN QUERY
+  SELECT p.user_id, coalesce(p.full_name,'') as full_name, coalesce(p.email,'') as email,
+    _kind as kind, 0 as default_count, 0 as today_count, coalesce(not (a.present is false), true) as present_today
+  FROM public.profiles p
+  JOIN public.user_roles ur on ur.user_id = p.user_id and ur.role = _role
+  LEFT JOIN public.attendance a on a.user_id = p.user_id and a.date = current_date
+  ORDER BY full_name;
+END $function$;

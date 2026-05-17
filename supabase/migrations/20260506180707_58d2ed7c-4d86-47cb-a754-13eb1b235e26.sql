@@ -162,10 +162,9 @@ begin
     raise exception 'Not allowed';
   end if;
   if _count is null or _count <= 0 then return 0; end if;
-  if not (public.has_role(auth.uid(), 'admin') or exists (
-    select 1 from public.auditor_team_leads
-    where team_lead_id = auth.uid() and auditor_id = _auditor)) then
-    raise exception 'Auditor not in your team';
+  -- Allow team leads/admins to add lines to any user that holds the auditor role
+  if not (public.has_role(auth.uid(), 'admin') or public.has_role(_auditor, 'auditor')) then
+    raise exception 'Selected user is not a QA auditor';
   end if;
 
   with picked as (
@@ -191,10 +190,9 @@ begin
     raise exception 'Not allowed';
   end if;
   if _count is null or _count <= 0 then return 0; end if;
-  if not (public.has_role(auth.uid(), 'admin') or exists (
-    select 1 from public.auditor_team_leads
-    where team_lead_id = auth.uid() and auditor_id = _auditor)) then
-    raise exception 'Auditor not in your team';
+  -- Allow team leads/admins to add lines to any user that holds the expense_auditor role
+  if not (public.has_role(auth.uid(), 'admin') or public.has_role(_auditor, 'expense_auditor')) then
+    raise exception 'Selected user is not an Expense Auditor';
   end if;
 
   with picked as (

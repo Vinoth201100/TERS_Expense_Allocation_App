@@ -537,7 +537,8 @@ const AddMorePanel = ({ kind }: { kind: "qa" | "ea" }) => {
   const [busyId, setBusyId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
-    const { data } = await supabase.rpc("get_tl_benchmarks" as never);
+    const role = kind === "qa" ? "auditor" : "expense_auditor";
+    const { data } = await supabase.rpc("get_auditors_by_role" as never, { _role: role, _kind: kind } as never);
     setRows(((data ?? []) as AuditorRow[]).filter((r) => r.kind === kind));
   }, [kind]);
 
